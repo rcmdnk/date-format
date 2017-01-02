@@ -1,5 +1,3 @@
-require 'octopress-date-format/version'
-
 module Octopress
   module DateFormat
 
@@ -147,15 +145,4 @@ module Octopress
       end
     end
   end
-end
-
-if defined? Octopress::Docs
-  Octopress::Docs.add({
-    name:        "Octopress Date Format",
-    gem:         "octopress-date-format",
-    version:     Octopress::DateFormat::VERSION,
-    description: "Put nicely formatted dates on any post or page",
-    path:        File.expand_path(File.join(File.dirname(__FILE__), "../")),
-    source_url:  "https://github.com/octopress/date-format",
-  })
 end
