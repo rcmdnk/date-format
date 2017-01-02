@@ -37,12 +37,17 @@ module Octopress
           page.data['time_updated_text'] = format_time(updated)
           page.data['date_updated_html'] = date_updated_html(updated, false)
           page.data['date_time_updated_html'] = date_updated_html(updated)
+        elsif page.data['date'] || page.respond_to?(:date)
+          page.data['date_html'].sub!('entry-date','entry-date updated')
+          page.data['date_html'].sub!('datePublished','datePublished dateModified')
+          page.data['date_time_html'].sub!('entry-date','entry-date updated')
+          page.data['date_time_html'].sub!('datePublished','datePublished dateModified')
         end
         page
       end
 
       def date_html(date, time=true)
-        tag =  "<time class='entry-date' datetime='#{ date.xmlschema }'>"
+        tag =  "<time itemprop='datePublished' class='entry-date' datetime='#{ date.xmlschema }'>"
         tag += "<span class='date'>#{format_date(date, true)}</span>"
         if time
           tag += " <span class='time'>#{format_time(date)}</span>" if time
@@ -51,7 +56,7 @@ module Octopress
       end
 
       def date_updated_html(date, time=true)
-        date_html(date, time).sub('entry-date','updated')
+        date_html(date, time).sub('entry-date','updated').sub('datePublished','dateModified')
       end
 
       def format_date(date, html=false)
@@ -117,7 +122,7 @@ module Octopress
         DateFormat.config = site.config
       end
 
-      Jekyll::Hooks.register [:page, :post], :post_init do |item|
+      Jekyll::Hooks.register [:documents, :pages, :posts], :post_init do |item|
         DateFormat.hack_date(item)
       end
     else
