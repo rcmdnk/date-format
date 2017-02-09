@@ -120,7 +120,7 @@ module Octopress
         DateFormat.config = site.config
       end
 
-      Jekyll::Hooks.register [:documents, :pages, :posts], :post_init do |item|
+      Jekyll::Hooks.register [:documents, :pages, :posts], :pre_render do |item|
         DateFormat.hack_date(item)
       end
     else
