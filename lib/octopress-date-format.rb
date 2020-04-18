@@ -146,8 +146,6 @@ module Octopress
     end
   end
 end
-<<<<<<< HEAD
-=======
 
 module Jekyll
   class DateHTML < Liquid::Tag
@@ -192,4 +190,3 @@ Liquid::Template.register_tag('date_html', Jekyll::DateHTML)
 Liquid::Template.register_tag('date_time_html', Jekyll::DateHTML)
 Liquid::Template.register_tag('date_updated_html', Jekyll::DateUpdatedHTML)
 Liquid::Template.register_tag('date_time_updated_html', Jekyll::DateTimeUpdatedHTML)
->>>>>>> origin/mymod
